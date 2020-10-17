@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ٍStudent Form</title>
+ 
+</head>
+<body>
+    <form id ="std-form" onsubmit="return addStd('list', this.name, this.id, this.major)">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" >
+        <br>
+        <br>
+        <label for="id"> id</label>
+        <input type="text" id="id" name="id" >
+        <br>
+        <br>
+        <label for="major">Choose a major:</label>
+        <select name="major" id="major">
+            <option value=""> </option>
+             <option value="IT">IT</option>
+            <option value="CS">CS</option>
+            <option value="CSE">CSE</option>
+         </select>
+         <br>
+         <br>
+     
+        <button onclick="addstd()">add</button>
+        <button onclick="sortList()">Sort</button>
+        <br>
+        <br>
+        <input type="text" id="myInput" onkeyup="search()" placeholder="Search for names.." title="Type in a name">
+            
+        <ul id ="list">
+          
+        </ul>
+
+     <script >
+
+    function addStd(list, inputField) { 
+        var list = document.getElementById(list);
+        var listItem = document.createElement("li");
+        var name = document.getElementById(name);
+        var id = document.getElementById(id);
+        var major = document.getElementById(major);
+        listItem.innerText = inputField.value;
+        list.appendChild(listItem);
+       return false; // stop submission
+    }
+ 
+    function search() {
+    // Declare variables
+      var input, filter, ul, li, a, i, txtValue;
+      input = document.getElementById('myInput');
+      filter = input.value.toUpperCase();
+      ul = document.getElementById("myUL");
+      li = ul.getElementsByTagName('li');
+ 
+      // Loop through all list items, and hide those who don't match the search query
+      for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("li")[0];
+        txtValue = li.textContent || li.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          li[i].style.display = "";
+        } else {
+          li[i].style.display = "none";
+        }
+      }
+   }       
+ 
+       
+        function sortList() {
+          var list, i, switching, b, shouldSwitch;
+          list = document.getElementById("list");
+          switching = true;
+         
+          while (switching) {
+            switching = false;
+            b = list.getElementsByTagName("li");
+
+            for (i = 0; i < (b.length - 1); i++) {
+              shouldSwitch = false;
+              if (b[i].innerHTML.toLowerCase() > b[i + 1].innerHTML.toLowerCase()) {
+                shouldSwitch = true;
+                break;
+              }
+            }
+           
+            if (shouldSwitch) {
+              b[i].parentNode.insertBefore(b[i + 1], b[i]);
+              switching = true;
+            }
+          }
+        }
+
+        
+            let stds = [];
+              
+              function addstd ()
+              {
+                  let std = {
+                      name: document.getElementById('name').value,
+                      id: document.getElementById('id').value,
+                      major: document.getElementById('major').value
+                  }
+ 
+                  stds.push(std); 
+                  
+                  var ul = document.getElementById("list");
+                  var li = document.createElement("li");
+                  li.appendChild(document.createTextNode("Element 4")); 
+              }
+       
+        
+
+        </script>
+ 
+</body>
+</html>
+ 
+ 
+ 
+
